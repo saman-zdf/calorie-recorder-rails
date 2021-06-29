@@ -1,0 +1,41 @@
+<h1>Calorie Tracker</h1>
+  <% if flash[:notice] %>
+<div class="alert alert-info" role="alert">
+    <%= flash[:notice] %>
+</div>
+  <% end %>
+  <% if flash[:destroy] %>
+<div class="alert alert-danger" role="alert">
+    <%= flash[:destroy] %>
+</div>
+  <% end %>
+  <% if flash[:edit] %>
+<div class="alert alert-primary" role="alert">
+    <%= flash[:edit] %>
+</div>
+  <% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Meal
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @foodlogs.each do |item| %>
+          <td>
+            <%= item.meal %>
+          </td>
+          <td>
+          </td>
+      <td><%= link_to "Edit", edit_foodlog_path(item), class: "btn btn-info" %></td>
+      <td><%= link_to "Show", foodlog_path(item), class: "btn btn-success" %></td>
+      <td><%= link_to "Delete", item, method: :delete, class: "btn btn-danger" %></td>
+    </tr>
+      <% end %>
+
+  </tbody>
+</table>
+<%= link_to "New Items", new_foodlogs_path, class: "btn btn-primary"  %>

@@ -1,0 +1,9 @@
+<h1>Your Record</h1>
+<ul class="list-group">
+  <li class="list-group-item">Meal: <%= @foodlog.meal %></li>
+  <li class="list-group-item">Calories: <%= @foodlog.calorie %></li>
+  <li class="list-group-item">Proteins: <%= @foodlog.protein %></li>
+  <li class="list-group-item">Time: <%= @foodlog.time %></li>
+</ul>
+<%= link_to "Edit", edit_foodlog_path, class: "btn btn-info mt-3" %>
+<%= link_to "Back", foodlogs_path, class: "btn btn-warning text-white mt-3" %>
