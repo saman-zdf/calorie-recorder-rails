@@ -6,5 +6,4 @@ Rails.application.routes.draw do
   get 'foodlogs/:id', to: "foodlogs#show", as: "foodlog"
   patch 'foodlogs/:id', to: "foodlogs#update"
   delete 'foodlogs/:id', to: "foodlogs#destroy"
-  # resources :foodlogs
 end
