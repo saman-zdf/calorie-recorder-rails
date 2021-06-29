@@ -1,0 +1,25 @@
+<h1>Calorie Tracker</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Meal
+      </th>
+      <th>
+        Time
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @foodlogs.each do |item| %>
+    <tr>
+      <td>
+        <%= item.meal %>
+      </td>
+      <td>
+        <%= item.calorie %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
