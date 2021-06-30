@@ -1,6 +1,7 @@
 class FoodlogsController < ApplicationController
   before_action :set_time, only: [:new, :edit]
   before_action :set_id, only: [:edit, :update, :show, :destroy]
+  before_action :authenticate_user!
 
   def index
     @foodlogs = Foodlog.all
@@ -26,13 +27,13 @@ class FoodlogsController < ApplicationController
   def update
     @foodlog.update(food_params)
     redirect_to foodlogs_path
-    flash[:edit] = "Your log has been updated!!!"
+    flash[:alert] = "Your log has been updated!!!"
   end
 
   def destroy
     @foodlog.destroy
     redirect_to foodlogs_path
-    flash[:destroy] = "Your item has been deleted!!!"
+    flash[:alert] = "Your item has been deleted!!!"
   end
 
   private
