@@ -1,9 +1,10 @@
 <h1>Todolists</h1>
-
-<table class="table">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Description</th>
+      <th></th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -13,13 +14,32 @@
       <% if todolist.user == current_user %>
         <% if todolist.complete %>
             <tr>
-              <td class="strike"><%= link_to todolist.description, edit_todolist_path(todolist) %></td>
+              <td class="text-decoration-line-through"><%= link_to todolist.description, edit_todolist_path(todolist) %></td>
+              <td>
+                <article>
+                  <%= form_for(todolist) do |form |%>
+                  <%= form.text_field :description, type: "hidden"%>
+                  <%= form.check_box :complete, :checked => false,  class: "checked"%>
+                  <%= form.submit "Uncross", class: "btn btn-outline-dark" %>
+                  <% end %>
+                </article>
+              </td>
+              <td><%= link_to "Show", todolist_path(todolist), class: "btn btn-outline-info"  %></td>
               <td><%= link_to 'Destroy', todolist, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
             </tr>
         <% else %>
             <tr>
-              <td><%= todolist.id %></td>
               <td><%= link_to todolist.description, edit_todolist_path(todolist), class: "custom-link" %></td>
+              <td>
+                <article>
+                  <%= form_for(todolist) do |form |%>
+                  <%= form.text_field :description, type: "hidden"%>
+                  <%= form.check_box :complete, :checked => true,  class: "checked"%>
+                  <%= form.submit "Cross", class: "btn btn-outline-dark" %>
+                  <% end %>
+                </article>
+              </td>
+                <td><%= link_to "Show", todolist_path(todolist), class: "btn btn-outline-info"  %></td>
               <td><%= link_to 'Destroy', todolist, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
             </tr>
         <% end %>
