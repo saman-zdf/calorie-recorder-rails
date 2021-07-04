@@ -25,7 +25,7 @@ class TodolistsController < ApplicationController
 
     respond_to do |format|
       if @todolist.save
-        format.html { redirect_to @todolist, notice: "Todolist was successfully created." }
+        format.html { redirect_to todolists_path, notice: "Todolist was successfully created." }
         format.json { render :show, status: :created, location: @todolist }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TodolistsController < ApplicationController
   def update
     respond_to do |format|
       if @todolist.update(todolist_params)
-        format.html { redirect_to @todolist, notice: "Todolist was successfully updated." }
+        format.html { redirect_to todolists_path, notice: "Todolist was successfully updated." }
         format.json { render :show, status: :ok, location: @todolist }
       else
         format.html { render :edit, status: :unprocessable_entity }
