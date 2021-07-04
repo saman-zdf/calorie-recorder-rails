@@ -1,7 +1,8 @@
 class FoodlogsController < ApplicationController
   before_action :set_time, only: [:new, :edit]
   before_action :set_id, only: [:edit, :update, :show, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :user, only: [:edit, :update, :destroy]
 
   def index
     @foodlogs = Foodlog.all
@@ -9,9 +10,12 @@ class FoodlogsController < ApplicationController
 
   def new
     @foodlog = Foodlog.new
+    # @foodlog = current_user.foodlogs.build
   end
   def create 
-    @foodlog = Foodlog.create(food_params)
+    # @foodlog = current_user.foodlogs.build(food_params)
+        @foodlog = Foodlog.create(food_params)
+
     flash[:notice] = "Your foodlog has been successfully created!"
     redirect_to foodlogs_path
   end
@@ -35,10 +39,14 @@ class FoodlogsController < ApplicationController
     redirect_to foodlogs_path
     flash[:alert] = "Your item has been deleted!!!"
   end
+  def user 
+    @foodlog = current_user.foodlogs.find_by(id: params[:id])
+    redirect_to foodlogs_path, notice: "You not authorized to edit or delete this content!!" if @foodlog.nil?
+  end
 
   private
     def food_params
-      params.require(:foodlog).permit(:meal, :calorie, :protein, :time)
+      params.require(:foodlog).permit(:meal, :calorie, :protein, :time, :user_id)
     end
     def set_time
       @times = Foodlog.times.keys

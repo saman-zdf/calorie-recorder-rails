@@ -5,5 +5,7 @@
   <li class="list-group-item">Proteins: <%= @foodlog.protein %></li>
   <li class="list-group-item">Time: <%= @foodlog.time %></li>
 </ul>
-<%= link_to "Edit", edit_foodlog_path, class: "btn btn-info mt-3" %>
+<% if user_signed_in? %>
+  <%= link_to "Edit", edit_foodlog_path, class: "btn btn-info mt-3" %>
+<% end %>
 <%= link_to "Back", foodlogs_path, class: "btn btn-warning text-white mt-3" %>

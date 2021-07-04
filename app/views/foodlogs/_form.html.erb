@@ -1,26 +1,28 @@
-<h1>You can edit you inputs</h1>
-<%# nevere ever use html form with form_with, otherwise your method won't work %>
-  <%= form_with model: @foodlog do |form|%>
-    <div class="mb-3">
-      <%= form.label :meal, class: "form-label" %>
-      <%= form.text_field :meal, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :calories, class: "form-label" %>
-      <%= form.number_field :calorie, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :proteins, class: "form-label" %>
-      <%= form.number_field :protein, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <% for option in @times %>
-        <%= form.radio_button :time, option, class: "form-check-label" %>
-        <%= form.label option.to_sym, option, class: "form-sheck-label" %>
-      <% end %>
-    </div>
-    <div class="mb-3">
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
 
+<%# nevere ever use html form with form_with, otherwise your method won't work %>
+<%= form_with model: @foodlog do |form|%>
+  <div class="mb-3">
+    <%= form.label :meal, class: "form-label" %>
+    <%= form.text_field :meal, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :calories, class: "form-label" %>
+    <%= form.number_field :calorie, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :proteins, class: "form-label" %>
+    <%= form.number_field :protein, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.number_field :user_id, class: "form-control", value: current_user.id, id: :foodlog_user_id, type: :hidden %>
+  </div>
+  <div class="mb-3">
+    <% for option in @times %>
+      <%= form.radio_button :time, option, class: "form-check-label" %>
+      <%= form.label option.to_sym, option, class: "form-sheck-label" %>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
 <% end %>
