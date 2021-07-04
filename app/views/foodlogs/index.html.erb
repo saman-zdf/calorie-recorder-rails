@@ -9,17 +9,20 @@
   <tbody>
     <tr>
       <% @foodlogs.each do |item| %>
-          <td>
-            <%= item.meal %>
-          </td>
-          <td>
-          </td>
-      <td><%= link_to "Edit", edit_foodlog_path(item), class: "btn btn-info" %></td>
-      <td><%= link_to "Show", foodlog_path(item), class: "btn btn-success" %></td>
-      <td><%= link_to "Delete", item, method: :delete, class: "btn btn-danger" %></td>
+        <% if item.user == current_user %>
+        <td>
+          <%= item.meal %>
+        </td>
+        <td><%= link_to "Edit", edit_foodlog_path(item), class: "btn btn-info" %></td>
+        <td><%= link_to "Show", foodlog_path(item), class: "btn btn-success" %></td>
+        <td><%= link_to "Delete", item, method: :delete, class: "btn btn-danger" %></td>
+        <% end %>
     </tr>
       <% end %>
   </tbody>
 </table>
-<%= link_to "New Items", new_foodlogs_path, class: "btn btn-primary"  %>
+<% if user_signed_in? %>
+<%= link_to "New Item", new_foodlogs_path, class: "btn btn-primary" %> 
+<% end %>
+
 
