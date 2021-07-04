@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table table-bordered">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Complete</th>
+    </tr>
+    <tbody>
+      <tr>
+        <td><%= @todolist.description %></td>
+        <td><%= @todolist.complete %></td>
+      </tr>
+    </tbody>
+  </thead>
+</table>
+
+<%= link_to 'Edit', edit_todolist_path(@todolist), class: "btn btn-primary mt-2" %> 
+<%= link_to 'Back', todolists_path, class: "btn btn-dark mt-2" %>
