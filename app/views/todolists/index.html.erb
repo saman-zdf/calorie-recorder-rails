@@ -1,0 +1,34 @@
+<h1>Todolists</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todolists.each do |todolist| %>
+      <% if todolist.user == current_user %>
+        <% if todolist.complete %>
+            <tr>
+              <td class="strike"><%= link_to todolist.description, edit_todolist_path(todolist) %></td>
+              <td><%= link_to 'Destroy', todolist, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
+            </tr>
+        <% else %>
+            <tr>
+              <td><%= todolist.id %></td>
+              <td><%= link_to todolist.description, edit_todolist_path(todolist), class: "custom-link" %></td>
+              <td><%= link_to 'Destroy', todolist, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
+            </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user %>
+<%= link_to 'New Todolist', new_todolist_path, class: "btn btn-primary" %>
+<% end %>

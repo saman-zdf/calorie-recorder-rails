@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # devise_for :users
-  root "foodlogs#index"
+  resources :todolists
+  root "home#index"
   get '/foodlogs', to: "foodlogs#index", as: "foodlogs"
   get 'foodlogs/new', to: "foodlogs#new", as: "new_foodlogs"
   post '/foodlogs', to: "foodlogs#create"
